@@ -11,9 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.event.Listener;
-import org.spongepowered.api.event.game.state.GamePostInitializationEvent;
+import org.spongepowered.api.event.game.state.GameInitializationEvent;
 import org.spongepowered.api.plugin.Dependency;
 import org.spongepowered.api.plugin.Plugin;
+import org.spongepowered.api.scheduler.Task;
 import org.spongepowered.api.world.Location;
 import org.spongepowered.api.world.World;
 
@@ -35,7 +36,11 @@ public class WarpConverter {
     }
 
     @Listener
-    public void postInit(GamePostInitializationEvent event) {
+    public void init(GameInitializationEvent event) {
+        Task.builder().execute(this::convert).submit(this);
+    }
+
+    public void convert() {
         NucleusWarpService service = Sponge.getServiceManager().provideUnchecked(NucleusWarpService.class);
         Node node = NodeAdapter.hocon().from(configDir.resolve("convert-warps.conf"));
 
