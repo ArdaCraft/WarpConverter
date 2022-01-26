@@ -2,7 +2,7 @@ package me.ardacraft.warps;
 
 import com.flowpowered.math.vector.Vector3d;
 import com.google.inject.Inject;
-import io.github.nucleuspowered.nucleus.api.service.NucleusWarpService;
+import io.github.nucleuspowered.nucleus.api.module.warp.NucleusWarpService;
 import me.dags.data.NodeAdapter;
 import me.dags.data.node.Node;
 import me.dags.data.node.NodeObject;
